@@ -1,0 +1,9 @@
+[influxdb]
+token = 
+url = 
+org = 
+bucket = 
+
+[mqtt]
+topic = 
+host = 

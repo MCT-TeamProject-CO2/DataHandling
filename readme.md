@@ -8,7 +8,7 @@ you might also need to connect to the howest network through the recommended pro
 
 ## step 2
 
-in the `config` folder there is a file called `config.ini.example`. remove the `.example` extension and edit the file in your text editor of choice.
+in the [`config`](https://github.com/MCT-TeamProject-CO2/DataHandling/tree/master/config) folder there is a file called [`config.ini.example`](https://github.com/MCT-TeamProject-CO2/DataHandling/blob/master/config/config.ini.example). remove the `.example` extension and edit the file in your text editor of choice.
 
 the config file will have some placholder text, this needs to be filled in as following:
 

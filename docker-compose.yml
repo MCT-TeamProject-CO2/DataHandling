@@ -1,0 +1,6 @@
+version: "3"
+services:
+  mqtt-client:
+    build: .
+    volumes:
+     - ./config/config.ini:/usr/src/app/config

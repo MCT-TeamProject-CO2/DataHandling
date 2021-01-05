@@ -19,7 +19,7 @@ for **`[influxdb]`**
 - `org` = the organization on influx that the bucket belongs to
 - `bucket` = the bucket(table) that will hold the data
 
-for `[mqtt]`
+for **`[mqtt]`**
 
 - `topic` = the topic to subscribe to on the mqtt broker
 - `host`= host ip/address of the mqtt broker

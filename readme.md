@@ -12,7 +12,7 @@ in the [`config`](https://github.com/MCT-TeamProject-CO2/DataHandling/tree/maste
 
 the config file will have some placholder text, this needs to be filled in as following:
 
-for `[influxdb]`
+for **`[influxdb]`**
 
 - `token` = the access token to the influxdb database
 - `url` = the hostname or ip needed to connect to influxdb
@@ -26,18 +26,26 @@ for `[mqtt]`
 
 ## step 3
 
-in the repository there are some docker files include. In a command terminal navigate to the cloned/downloaded folder and type the following 
+in the repository there are some docker files include. In a command terminal navigate to the cloned/downloaded folder and type the following:
 
->docker-compose up
+```sh
+docker-compose up
+```
 
 to execute the docker container. Additionally you can add the `-d` parameter to the docker compose command to run it in the background.
 
->docker compose up -d
+```sh
+docker compose up -d
+```
 
-to see all running containers you can type
+to see all running containers you can type the following:
 
->docker ps
+```sh
+docker ps
+```
 
 and to stop the service simply type (whilst in the directory)
 
->docker-compose stop
+```sh
+docker-compose stop
+```

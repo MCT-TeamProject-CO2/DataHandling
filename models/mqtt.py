@@ -11,10 +11,10 @@ class MyClient(paho.Client):
     
     def __on_connect(self, client, flags, userdata, rc):
         print(f'''
-client connected:
-    result code > {rc}
-    flags > {flags}
-    userdata > {userdata}''')
+            client connected:
+                result code > {rc}
+                flags > {flags}
+                userdata > {userdata}''')
         client.subscribe(self.__topic)
     
     def connect(self, hostaddr:str, topic:str, port:int=1883, keep_alive:int=0):

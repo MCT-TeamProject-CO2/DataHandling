@@ -15,10 +15,6 @@ host_address = config.get("mqtt", "host")
 topic = config.get("mqtt", "topic")
 #endregion
 
-#region MongoDB
-
-#endregion
-
 #region INFLUXDB
 token = config.get("influxdb", "token")
 url = config.get("influxdb", "url")

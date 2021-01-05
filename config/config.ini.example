@@ -1,0 +1,11 @@
+[influxdb]
+token = 
+url = 
+org = 
+bucket = 
+
+[mongodb]
+
+[mqtt]
+topic = Airquality/#
+host = 172.23.83.254

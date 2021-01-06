@@ -3,19 +3,23 @@ from influxdb_client.client.write_api import SYNCHRONOUS
 import models.mqtt as mqtt
 import configparser
 
+# this init file will load necessary global variables on startup
 
 #region CONFIG
+# load in the configuration file
 config = configparser.ConfigParser()
 config.read("./config/config.ini")
 #endregion
 
 #region MQTT
+# set mqtt variables
 client = mqtt.MyClient()
 host_address = config.get("mqtt", "host")
 topic = config.get("mqtt", "topic")
 #endregion
 
 #region INFLUXDB
+# set influx database variables
 token = config.get("influxdb", "token")
 url = config.get("influxdb", "url")
 organization = config.get("influxdb", "org")

@@ -2,8 +2,12 @@ from influxdb_client import InfluxDBClient, Point, WritePrecision
 from influxdb_client.client.write_api import SYNCHRONOUS
 import models.mqtt as mqtt
 import configparser
+import os
 
 # this init file will load necessary global variables on startup
+
+#args
+debug = os.environ.get('DEBUG', 0)
 
 #region CONFIG
 # load in the configuration file

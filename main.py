@@ -12,11 +12,10 @@ import json
 def on_message(client, userdata, msg):
     data = json.loads((msg.payload).decode('utf-8'))
 
-# region DEBUG
-# some code only for debugging, as it slows down the service a big chunk
-    # now = datetime.datetime.now()
-    # print(f"written data on {now.strftime('%b %d %Y %H:%M:%S')}: {str(data)}")
-# endregion
+    if debug:    
+        now = datetime.datetime.now()
+        print(f"written data on {now.strftime('%b %d %Y %H:%M:%S')}: {str(data)}")
+
 
     # create a data point for the influx database from the received mqtt data
     point = Point(data["Room"])\

@@ -14,11 +14,9 @@ config.read("./config/config.ini")
 #region ARGS
 # general arguments
 ARG = os.environ.get('DEBUG', 0)
-if isinstance(ARG, int):
-    debug = ARG
-elif isinstance(ARG, str):
-    debug = 1 if ARG.lower() == 'true' else 0
-else:
+try:
+    debug = int(ARG)
+except:
     debug = 0
 
 disconnect_endpoint = config.get("endpoints", "disconnected")

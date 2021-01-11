@@ -13,13 +13,13 @@ config.read("./config/config.ini")
 
 #region ARGS
 # general arguments
-debug = os.environ.get('DEBUG', 0)
+debug = os.environ.get('DEBUG', 1)
 try:
     debug = 1 if debug.lower() == "true" else 0
 except:
     debug = debug if isinstance(debug, int) else 0
 
-disconnect_endpoint = config.read("endpoints", "disconnected")
+disconnect_endpoint = config.get("endpoints", "disconnected")
 #endregion 
 
 #region MQTT

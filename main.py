@@ -11,8 +11,6 @@ def on_message(client, userdata, msg):
 
     if debug:
         now = datetime.datetime.now()
-        print(f"written data on {now.strftime('%b %d %Y %H:%M:%S')}: {str(data)}")
-
 
     # create a data point for the influx database from the received mqtt data
     point = Point(data["Room"])\
@@ -25,9 +23,12 @@ def on_message(client, userdata, msg):
 
     try:
         write_api.write(bucket, organization, point)
-    except:
         if debug:
-            print("can't write to influxdb")
+            print(f"written data on {now.strftime('%b %d %Y %H:%M:%S')}: {str(data)}")
+        
+    except Exception as e:
+        if debug:
+            print("can't write to influxdb, reason:", (json.loads(e.body))["message"])
 
 if __name__ == "__main__":
     try:

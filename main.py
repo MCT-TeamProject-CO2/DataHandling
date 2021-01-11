@@ -35,7 +35,7 @@ if __name__ == "__main__":
     try:
         print(f"DEBUG MODE [{colorama.Fore.GREEN}{'ON' if debug == 1 else 'OFF'}{colorama.Fore.RESET}]")
         client.on_message = on_message
-        client.connect(host_address, topic, debug=debug, keep_alive=5, disconnect_endpoint=disconnect_endpoint)
+        client.connect(host_address, topic, debug_mode=debug, keep_alive=5, disconnect_endpoint=disconnect_endpoint)
     except KeyboardInterrupt:
     # if manually stopped through a keyboardinterupt, give message
         print(f"\n{colorama.Fore.YELLOW}[ALERT]{colorama.Fore.RESET} Manually stopped")

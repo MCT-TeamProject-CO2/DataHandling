@@ -1,6 +1,7 @@
 import paho.mqtt.client as paho
 import datetime
 import requests
+import colorama
 import json
 
 # this class extends the basic mqtt Client class from the paho module
@@ -19,7 +20,7 @@ class MyClient(paho.Client):
     def on_connect(self, client, flags, userdata, rc):
         if rc == 0:
             print(f'''
-client connected:
+{colorama.Fore.BLUE}[STATUS]{colorama.Fore.RESET} client connected:
     result code > {rc}
     flags > {flags}
     userdata > {userdata}''')
@@ -28,7 +29,7 @@ client connected:
             return ConnectionError("Error: Bad connection, result code [{}]".format(rc))
 
     def on_disconnect(self, client, userdata, rc):
-        msg = "client disconnected, result code [{}]".format(rc)
+        msg = f"{colorama.Fore.BLUE}[STATUS]{colorama.Fore.RESET} client disconnected, result code [{colorama.Fore.YELLOW}{rc}{colorama.Fore.RESET}]"
         print(msg)
         data = json.dumps({
             "message": msg,
@@ -38,13 +39,13 @@ client connected:
         try:
             req = requests.post(self.__disc_end, data)
             if (req.status_code not in range(200,300)) and self.__debug:
-                print(f"{self.__disc_end} returned http code", f"<{req.status_code}>")
+                print(f"{self.__disc_end} returned http code", f"{colorama.Fore.BLUE}<{req.status_code}>{colorama.Fore.RESET}")
         except:
             if self.__debug:
                 print(self.__disc_end, "doesn't exist")
 
     def check_connection(self):
-        print("waiting for connection")
+        print(f"{colorama.Fore.BLUE}[STATUS]{colorama.Fore.RESET} waiting for connection")
         while not self.is_connected():
             pass
         while self.is_connected():
@@ -67,5 +68,5 @@ client connected:
         try:
             self.connect_async(host=hostaddr, port=port, keepalive=keep_alive)
         except:
-            return ConnectionError("Error: Bad connection")
+            return ConnectionError(f"{colorama.Fore.RED}[ERROR]{colorama.Fore.RESET} Bad connection")
         self.check_connection()

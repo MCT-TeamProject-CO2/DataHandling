@@ -5,15 +5,22 @@ import configparser
 import os
 
 # this init file will load necessary global variables on startup
-
-#args
-debug = os.environ.get('DEBUG', 0)
-
 #region CONFIG
 # load in the configuration file
 config = configparser.ConfigParser()
 config.read("./config/config.ini")
 #endregion
+
+#region ARGS
+# general arguments
+debug = os.environ.get('DEBUG', 0)
+try:
+    debug = 1 if debug.lower() == "true" else 0
+except:
+    debug = debug if isinstance(debug, int) else 0
+
+disconnect_endpoint = config.read("endpoints", "disconnected")
+#endregion 
 
 #region MQTT
 # set mqtt variables

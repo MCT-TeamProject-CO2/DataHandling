@@ -14,7 +14,6 @@ config.read("./config/config.ini")
 #region ARGS
 # general arguments
 ARG = os.environ.get('DEBUG', 0)
-ARG = 1
 if isinstance(ARG, int):
     debug = ARG
 elif isinstance(ARG, str):

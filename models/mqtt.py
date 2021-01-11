@@ -37,9 +37,11 @@ client connected:
 
         try:
             req = requests.post(self.__disc_end, data)
+            if (req.status_code not in range(200,300)) and self.__debug:
+                print(f"{self.__disc_end} returned http code", f"<{req.status_code}>")
         except:
             if self.__debug:
-                print(self.__disc_end, "not available")
+                print(self.__disc_end, "doesn't exist")
 
     def check_connection(self):
         print("waiting for connection")

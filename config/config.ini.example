@@ -7,3 +7,6 @@ bucket =
 [mqtt]
 topic = 
 host =
+
+[endpoints]
+disconnected = [domain.name]/api/v1/api/v1/mqtt_disconnect

@@ -13,7 +13,7 @@ config.read("./config/config.ini")
 
 #region ARGS
 # general arguments
-debug = os.environ.get('DEBUG', 1)
+debug = os.environ.get('DEBUG', 0)
 try:
     debug = 1 if debug.lower() == "true" else 0
 except:

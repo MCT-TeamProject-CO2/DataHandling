@@ -45,15 +45,17 @@ class MyClient(paho.Client):
                 print(self.__disc_end, "doesn't exist")
 
     def check_connection(self):
-        print(f"{colorama.Fore.BLUE}[STATUS]{colorama.Fore.RESET} waiting for connection")
+        i=0
         while not self.is_connected():
-            pass
+            if i<1:
+                print(f"{colorama.Fore.BLUE}[STATUS]{colorama.Fore.RESET} waiting for connection...")
+                i+=1
         while self.is_connected():
             pass
 
     # general connect method to initialize an mqtt connection
-    def connect(self, hostaddr:str, topic:str, port:int=1883, keep_alive:int=60, disconnect_endpoint:str="", debug:int=0):
-        self.__debug = debug
+    def connect(self, hostaddr:str, topic:str, port:int=1883, keep_alive:int=60, disconnect_endpoint:str="", debug_mode:int=0):
+        self.__debug = debug_mode
         self.__topic = MyClient.__check_type(topic, str)
         MyClient.__check_type(hostaddr, str)
         

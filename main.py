@@ -25,13 +25,14 @@ def on_message(client, userdata, msg):
         write_api.write(bucket, organization, point)
         if debug:
             print(f"written data on {now.strftime('%b %d %Y %H:%M:%S')}: {str(data)}")
-        
+
     except Exception as e:
         if debug:
             print("can't write to influxdb, reason:", (json.loads(e.body))["message"])
 
 if __name__ == "__main__":
     try:
+        print(f"starting, [DEBUG={debug}]")
         client.on_message = on_message
         client.connect(host_address, topic, debug=debug, keep_alive=5, disconnect_endpoint=disconnect_endpoint)
     except KeyboardInterrupt:

@@ -25,20 +25,20 @@ def on_message(client, userdata, msg):
     try:
         write_api.write(bucket, organization, point)
         if debug:
-            print(f"{colorama.Fore.BLUE}[STATUS]{colorama.Fore.RESET} written data on {now.strftime('%b %d %Y %H:%M:%S')}: {str(data)}")
+            print(f"{colorama.Fore.BLUE}[STATUS]{colorama.Fore.RESET} written data on {now.strftime('%b %d %Y %H:%M:%S')}UTC: {str(data)}")
 
     except Exception as e:
         if debug:
-            print(f"{colorama.Fore.YELLOW}[ALERT]{colorama.Fore.RESET} can't write to influxdb, reason:", (json.loads(e.body))["message"])
+            print(f"[{datetime.datetime.now()}UTC]: {colorama.Fore.YELLOW}[ALERT]{colorama.Fore.RESET} can't write to influxdb, reason:", (json.loads(e.body))["message"])
 
 if __name__ == "__main__":
     try:
-        print(f"DEBUG MODE [{colorama.Fore.GREEN}{'ON' if debug == 1 else 'OFF'}{colorama.Fore.RESET}]")
+        print(f"\nDEBUG MODE [{colorama.Fore.GREEN}{'ON' if debug == 1 else 'OFF'}{colorama.Fore.RESET}]")
         client.on_message = on_message
         client.connect(host_address, topic, debug_mode=debug, keep_alive=5, disconnect_endpoint=disconnect_endpoint)
     except KeyboardInterrupt:
     # if manually stopped through a keyboardinterupt, give message
-        print(f"\n{colorama.Fore.YELLOW}[ALERT]{colorama.Fore.RESET} Manually stopped")
+        print(f"\n[{datetime.datetime.now()}UTC]: {colorama.Fore.YELLOW}[ALERT]{colorama.Fore.RESET} Manually stopped")
     except Exception as e:
         # else show error
-        print(f"{colorama.Fore.RED}[Error]{colorama.Fore.RESET} {e}")
+        print(f"[{datetime.datetime.now()}UTC]: {colorama.Fore.RED}[Error]{colorama.Fore.RESET} {e}")

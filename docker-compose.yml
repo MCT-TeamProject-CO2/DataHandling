@@ -3,3 +3,5 @@ services:
   mqtt-client:
     build: .
     restart: unless-stopped
+    volumes:
+      - ./config:/src/usr/app/config

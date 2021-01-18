@@ -14,14 +14,13 @@ def on_message(client, userdata, msg):
         now = datetime.datetime.now()
 
     # create a data point for the influx database from the received mqtt data
-    point = Point(data["Room"])\
-        .field("humidity", float(data["Humidity"]))\
-        .field("tvoc_ppb", float(data["tvoc_ppb"]))\
-        .field("temperature", float(data["Temperature"]))\
-        .field("co2eq_ppm", float(data["co2eq_ppm"]))\
-        .time(data["Timestamp"], WritePrecision.NS)
+    point = Point(data["Room"])
+    for key in data.keys():
+        if (key.lower() != "room") and (key.lower() != "timestamp"):
+            point = point.field(str(key).lower(), float(data[key]))
+    point.time(data["Timestamp"], WritePrecision.NS)
+    
     # write the data to the database
-
     try:
         write_api.write(bucket, organization, point)
         if debug:

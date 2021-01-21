@@ -10,22 +10,26 @@ import colorama
 def on_message(client, userdata, msg):
     data = json.loads((msg.payload).decode('utf-8'))
 
-    if debug:
-        now = datetime.datetime.now()
-
     # create a data point for the influx database from the received mqtt data
-    point = Point(data["Room"])
-    for key in data.keys():
-        if (key.lower() != "room") and (key.lower() != "timestamp"):
-            point = point.field(str(key).lower(), float(data[key]))
-    point.time(data["Timestamp"], WritePrecision.NS)
-    
+    try:
+        if ((x for x in ["MAC", "IP"]) not in data.keys()) and data["Room"].lower() != "unknown":
+            point = Point(data["Room"])
+            for key in data.keys():
+                if (key.lower() != "room") and (key.lower() != "timestamp"):
+                    point = point.field(str(key).lower(), float(data[key]))
+            point.time(data["Timestamp"], WritePrecision.NS)
+        else:
+            print(f"[{datetime.datetime.now()}UTC]: {colorama.Fore.YELLOW}[ALERT]{colorama.Fore.RESET} got wrong format {data}")
+    except:
+        print(f"[{datetime.datetime.now()}UTC]: {colorama.Fore.YELLOW}[ALERT]{colorama.Fore.RESET} got wrong format {data}")
+
+
+
     # write the data to the database
     try:
         write_api.write(bucket, organization, point)
         if debug:
-            print(f"{colorama.Fore.BLUE}[STATUS]{colorama.Fore.RESET} written data on {now.strftime('%b %d %Y %H:%M:%S')}UTC: {str(data)}")
-
+            print(f"[{datetime.datetime.now()}UTC]: {colorama.Fore.BLUE}[STATUS]{colorama.Fore.RESET} written data > {str(data)}")
     except Exception as e:
         if debug:
             print(f"[{datetime.datetime.now()}UTC]: {colorama.Fore.YELLOW}[ALERT]{colorama.Fore.RESET} can't write to influxdb, reason:", (json.loads(e.body))["message"])

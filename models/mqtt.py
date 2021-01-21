@@ -21,8 +21,7 @@ class MyClient(paho.Client):
     def on_connect(self, client, flags, userdata, rc):
         if rc == 0:
             print(f'''
-[{datetime.datetime.now()}UTC]: 
-{colorama.Fore.BLUE}[STATUS]{colorama.Fore.RESET} client connected:
+[{datetime.datetime.now()}UTC]: {colorama.Fore.BLUE}[STATUS]{colorama.Fore.RESET} client connected:
     result code > {rc}
     flags > {flags}
     userdata > {userdata}''')

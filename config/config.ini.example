@@ -1,0 +1,12 @@
+[influxdb]
+token =
+url =
+org =
+bucket =
+
+[mqtt]
+topic =
+host =
+
+[endpoints]
+disconnected = https://<domain>/api/v1/api/v1/mqtt_disconnect

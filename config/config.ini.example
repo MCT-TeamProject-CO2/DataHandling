@@ -9,4 +9,4 @@ topic =
 host =
 
 [endpoints]
-disconnected = [domain.name]/api/v1/api/v1/mqtt_disconnect
+disconnected = https://[your.domain]/api/v1/api/v1/mqtt_disconnect

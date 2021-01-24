@@ -2,50 +2,61 @@
 
 ## step 1
 
-download or clone the repository to your system. And **make sure docker is installed**.
+Download or clone the repository to your system. **`Also, make sure docker and docker-compose are installed and functional`**.
 
-you might also need to connect to the howest network through the recommended proxy/vpn to access the mqtt broker, unless you are directly connected on the network of course.
+Note that you might also need to use a VPN proxy to connect to the network where the MQTT-broker is located. If so, make sure the VPN is installed and functional.
 
 ## step 2
 
-in the [`config`](https://github.com/MCT-TeamProject-CO2/DataHandling/tree/master/config) folder there is a file called [`config.ini.example`](https://github.com/MCT-TeamProject-CO2/DataHandling/blob/master/config/config.ini.example). remove the `.example` extension and edit the file in your text editor of choice.
+Within the [config](https://github.com/MCT-TeamProject-CO2/DataHandling/tree/master/config) folder there is a file named [config.ini.example](https://github.com/MCT-TeamProject-CO2/DataHandling/blob/master/config/config.ini.example). remove the `.example` extension and edit the file in your text editor of choice.
 
-the config file will have some placholder text, this needs to be filled in as following:
+The config file will have some placholder text. These parameters need to be configured as following:
 
-for **`[influxdb]`**
+**`[influxdb]`**
 
 - `token` = the access token to the influxdb database
 - `url` = the hostname or ip needed to connect to influxdb
 - `org` = the organization on influx that the bucket belongs to
-- `bucket` = the bucket(table) that will hold the data
+- `bucket` = the bucket (= database table) that will hold the datmeasurements
 
-for **`[mqtt]`**
+**`[mqtt]`**
 
 - `topic` = the topic to subscribe to on the mqtt broker
-- `host`= host ip/address of the mqtt broker
+- `host`= host- or ip-address of the mqtt broker on the network
+
+**`[endpoints]`**
+
+- `disconnected` = [the API endpoint](https://github.com/MCT-TeamProject-CO2/Node-Server/blob/main/api/v1/mqtt_disconnect.js) to send a message to when the client gets disconnected which should be supplied with the [Node server](https://github.com/MCT-TeamProject-CO2/Node-Server)
 
 ## step 3
 
-in the repository there are some docker files include. In a command terminal navigate to the cloned/downloaded folder and type the following:
+Within the repository there are some docker files included. In a command terminal navigate to the repository folder and type the following command:
 
-```sh
+```
 docker-compose up
 ```
 
-to execute the docker container. Additionally you can add the `-d` parameter to the docker compose command to run it in the background.
+Additionally you can add the `-d` parameter to the `docker-compose` command to run it in the background.
 
-```sh
+```
 docker compose up -d
 ```
 
-to see all running containers you can type the following:
-
-```sh
+You can check if the container is running with 
+```
 docker ps
 ```
+Or to see all existing containers:
+```
+docker ps -a
+```
 
-and to stop the service simply type (whilst in the directory)
+to stop the container, you can use 
+```
+docker stop <container name/ID>
+```
 
-```sh
+Or whilst in the [Datahandling](https://github.com/MCT-TeamProject-CO2/DataHandling/tree/master/) folder
+```
 docker-compose stop
 ```

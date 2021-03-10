@@ -32,6 +32,8 @@ The config file will have some placholder text. These parameters need to be conf
 
 Within the repository there are some docker files included. In a command terminal navigate to the repository folder and type the following command:
 
+Before trying to start the docker container you should edit the Dockerfile and change Line 10, fill in your howest login details where necessary.
+
 ```
 docker-compose up
 ```
